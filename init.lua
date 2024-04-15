@@ -525,8 +525,8 @@ require('lazy').setup({
       --  - ci'  - [C]hange [I]nside [']quote
       require('mini.ai').setup { n_lines = 500 }
       require('mini.files').setup()
-      --vim.keymap.set('n', '<leader>n', MiniFiles.open, { desc = 'Open minifiles' })
-      vim.keymap.set('n', '<leader>n', function()
+      vim.keymap.set('n', '<leader>n', MiniFiles.open, { desc = 'Open minifiles' })
+      vim.keymap.set('n', '<leader>N', function()
         MiniFiles.open(vim.api.nvim_buf_get_name(0))
       end, { desc = 'Open minifiles in folder of buffer' })
 
