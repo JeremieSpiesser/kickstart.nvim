@@ -1,16 +1,55 @@
 return {
   'ThePrimeagen/harpoon',
+  branch = 'harpoon2',
   lazy = false,
-  dependencies = {
-    'nvim-lua/plenary.nvim',
+  opts = {
+    menu = {
+      width = vim.api.nvim_win_get_width(0) - 2,
+    },
   },
-  config = true,
-  keys = {
-    { '<leader>ha', "<cmd>lua require('harpoon.mark').add_file()<cr>", desc = 'Mark file with harpoon' },
-    { '<C-h>', "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", desc = 'Harpoon go to slot 1' },
-    { '<C-j>', "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", desc = 'Harpoon go to slot 2' },
-    { '<C-k>', "<cmd>lua require('harpoon.ui').nav_file(3)<cr>", desc = 'Harpoon go to slot 3' },
-    { '<C-l>', "<cmd>lua require('harpoon.ui').nav_file(4)<cr>", desc = 'Harpoon go to slot 4' },
-    { '<leader>tt', "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = 'Show harpoon marks' },
-  },
+  keys = function()
+    local harpoon = require 'harpoon'
+    local keys = { {
+      '<leader>a',
+      function()
+        harpoon:list():append()
+      end,
+      desc = 'Harpoon add file',
+    } }
+    local mappings = { 'h', 'j', 'k', 'l' }
+
+    for i, k in ipairs(mappings) do
+      table.insert(keys, {
+        '<leader>' .. k,
+        function()
+          harpoon:list():replace_at(i)
+        end,
+        desc = 'Harpoon replace file at slot ' .. i,
+      })
+      table.insert(keys, {
+        '<C-' .. k .. '>',
+        function()
+          harpoon:list():select(i)
+        end,
+        desc = 'Harpoon go to file at slot ' .. i,
+      })
+    end
+
+    table.insert(keys, {
+      '<leader>ta',
+      function()
+        harpoon:list():add()
+      end,
+      desc = 'Harpoon add file',
+    })
+    table.insert(keys, {
+      '<leader>tt',
+      function()
+        harpoon.ui:toggle_quick_menu(harpoon:list())
+      end,
+      desc = 'Harpoon Quick Menu',
+    })
+
+    return keys
+  end,
 }
