@@ -36,6 +36,8 @@ vim.keymap.set('i', '<C-d>', '<C-d>zz')
 vim.keymap.set('i', '<Esc><C-s>', ':w<CR>')
 vim.keymap.set('n', '<C-s>', ':w<CR>')
 
+vim.keymap.set('n', '<leader>us', 'va{Vo')
+
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -107,24 +109,16 @@ require('lazy').setup({
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     config = function() -- This is the function that runs, AFTER loading
       require('which-key').setup()
-
-      -- Document existing key chains
-      require('which-key').register {
-        ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+      require('which-key').add {
+        { '<leader>c', desc = '[C]ode' },
+        { '<leader>d', desc = '[D]ocument' },
+        { '<leader>r', desc = '[R]ename' },
+        { '<leader>s', desc = '[S]earch' },
+        { '<leader>w', desc = '[W]orkspace' },
       }
     end,
+    keys = {},
   },
-
-  -- NOTE: Plugins can specify dependencies.
-  --
-  -- The dependencies are proper plugin specifications as well - anything
-  -- you do for a plugin at the top level, you can do for a dependency.
-  --
-  -- Use the `dependencies` key to specify the dependencies of a particular plugin
 
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
