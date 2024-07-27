@@ -10,17 +10,35 @@ vim.keymap.set('n', '<leader>u', function()
     require('oil').open()
   end
 end, { desc = 'Close oil.nvim' })
---
+
 --vim.keymap.set('n', '-', function()
 --  vim.cmd 'vsplit | wincmd l'
 --  require('oil').open()
 --end, { desc = 'Open parent directory' })
+
+vim.keymap.set('n', '<leader>e', '<CMD>NvimTreeToggle<CR>')
+
 return {
-  'stevearc/oil.nvim',
-  enabled = true,
-  opts = {},
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
-  config = function()
-    require('oil').setup {}
-  end,
+
+  {
+    'stevearc/oil.nvim',
+    enabled = true,
+    opts = {},
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require('oil').setup {}
+    end,
+  },
+  {
+    {
+      'nvim-tree/nvim-tree.lua',
+      dependencies = {
+        'nvim-tree/nvim-web-devicons',
+      },
+      config = function()
+        require('nvim-tree').setup {}
+      end,
+      --opts = { on_attach = on_attach_change },
+    },
+  },
 }
