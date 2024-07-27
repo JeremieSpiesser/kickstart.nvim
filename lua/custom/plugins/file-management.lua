@@ -17,6 +17,7 @@ end, { desc = 'Close oil.nvim' })
 --end, { desc = 'Open parent directory' })
 
 vim.keymap.set('n', '<leader>e', '<CMD>NvimTreeToggle<CR>')
+vim.keymap.set('n', '<leader>E', '<CMD>NvimTreeFindFile<CR>')
 
 return {
 
