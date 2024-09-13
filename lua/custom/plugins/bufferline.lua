@@ -4,7 +4,7 @@ vim.keymap.set('n', '<leader>pc', ':BufferLinePickClose<CR>')
 vim.keymap.set('n', '<leader>x', ':bd<CR>')
 return {
   'akinsho/bufferline.nvim',
-  version = '4.6.1',
+  version = '4.7.0',
   dependencies = 'nvim-tree/nvim-web-devicons',
   config = function()
     require('bufferline').setup()
