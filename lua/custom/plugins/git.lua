@@ -2,6 +2,7 @@ vim.keymap.set('n', '<leader>cy', ':GitBlameCopyFileURL<CR>', { desc = 'Copy git
 vim.g.gitblame_virtual_text_column = 100
 return {
   { 'f-person/git-blame.nvim' },
+  { 'ThePrimeagen/git-worktree.nvim' },
   {
     'kdheepak/lazygit.nvim',
     cmd = {

@@ -1,6 +1,6 @@
 local open = false
 
-vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
+--vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 vim.keymap.set('n', '<leader>u', function()
   if open then
     open = false
@@ -37,7 +37,9 @@ return {
         'nvim-tree/nvim-web-devicons',
       },
       config = function()
-        require('nvim-tree').setup {}
+        require('nvim-tree').setup {
+          sync_root_with_cwd = true,
+        }
       end,
       --opts = { on_attach = on_attach_change },
     },
