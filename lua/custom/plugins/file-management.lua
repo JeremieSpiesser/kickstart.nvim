@@ -1,15 +1,14 @@
-local open = false
-
 --vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 vim.keymap.set('n', '<leader>u', function()
-  if open then
-    open = false
+  local current_buf = vim.api.nvim_get_current_buf()
+  local current_bufname = vim.fn.bufname(current_buf)
+
+  if string.match(current_bufname, '^oil://') then
     require('oil').close()
   else
-    open = true
     require('oil').open()
   end
-end, { desc = 'Close oil.nvim' })
+end, { desc = 'Toggle oil.nvim' })
 
 --vim.keymap.set('n', '-', function()
 --  vim.cmd 'vsplit | wincmd l'
@@ -18,6 +17,9 @@ end, { desc = 'Close oil.nvim' })
 
 vim.keymap.set('n', '<leader>e', '<CMD>NvimTreeToggle<CR>')
 vim.keymap.set('n', '<leader>E', '<CMD>NvimTreeFindFile<CR>')
+
+vim.keymap.set('n', '<leader>st', '<CMD>Telescope file_browser<CR>')
+vim.keymap.set('n', '<leader>so', '<CMD>Telescope file_browser path=%:p:h select_buffer=true<CR>')
 
 return {
 
@@ -29,6 +31,10 @@ return {
     config = function()
       require('oil').setup {}
     end,
+  },
+  {
+    'nvim-telescope/telescope-file-browser.nvim',
+    dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
   },
   {
     {
