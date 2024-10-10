@@ -21,6 +21,13 @@ vim.keymap.set('n', '<leader>E', '<CMD>NvimTreeFindFile<CR>')
 vim.keymap.set('n', '<leader>st', '<CMD>Telescope file_browser<CR>')
 vim.keymap.set('n', '<leader>so', '<CMD>Telescope file_browser path=%:p:h select_buffer=true<CR>')
 
+vim.keymap.set('n', '<leader>oa', function()
+  require('track').toggle()
+end)
+vim.keymap.set('n', '<leader>oz', function()
+  require('track').search()
+end)
+
 return {
 
   {
@@ -49,5 +56,12 @@ return {
       end,
       --opts = { on_attach = on_attach_change },
     },
+  },
+  {
+    'niuiic/track.nvim',
+    dependencies = { 'niuiic/core.nvim', 'nvim-telescope/telescope.nvim' },
+    config = function()
+      require('track').setup()
+    end,
   },
 }
