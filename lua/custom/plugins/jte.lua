@@ -48,5 +48,11 @@ return {
   --     }
   --   end,
   -- },
+  {
+    'Kicamon/markdown-table-mode.nvim',
+    config = function()
+      require('markdown-table-mode').setup()
+    end,
+  },
   { dir = '~/coding/jte.nvim/', config = true },
 }
