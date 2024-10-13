@@ -27,6 +27,9 @@ end)
 vim.keymap.set('n', '<leader>oz', function()
   require('track').search()
 end)
+vim.keymap.set('n', '<leader>oe', function()
+  require('track').edit()
+end)
 
 return {
 
