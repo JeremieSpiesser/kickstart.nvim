@@ -29,6 +29,7 @@ return {
     -- order to load the plugin when the command is run for the first time
     keys = {
       { '<leader>lg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
+      { '<leader>lG', '<cmd>LazyGitCurrentFile<cr>', desc = 'LazyGit' },
     },
   },
 }

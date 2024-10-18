@@ -54,5 +54,5 @@ return {
       require('markdown-table-mode').setup()
     end,
   },
-  { dir = '~/coding/jte.nvim/', config = true },
+  --{ dir = '~/coding/jte.nvim/', config = true },
 }

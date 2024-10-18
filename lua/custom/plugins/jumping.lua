@@ -13,6 +13,11 @@ return {
     end,
   },
   {
+    'psliwka/vim-smoothie',
+    enabled = false,
+    lazy = false,
+  },
+  {
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',
     lazy = false,
