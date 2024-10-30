@@ -55,6 +55,11 @@ return {
       config = function()
         require('nvim-tree').setup {
           sync_root_with_cwd = true,
+          view = {
+            width = {
+              max = -1,
+            },
+          },
         }
       end,
       --opts = { on_attach = on_attach_change },
