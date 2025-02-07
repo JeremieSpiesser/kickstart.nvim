@@ -9,7 +9,7 @@ return {
           dictionary = 'qsdfghlmùwxcvbn',
         },
       }
-      vim.keymap.set('n', 'gl', snipe.create_buffer_menu_toggler())
+      vim.keymap.set('n', 'gl', snipe.open_buffer_menu)
     end,
   },
   {
