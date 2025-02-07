@@ -598,14 +598,14 @@ require('lazy').setup({
     end,
   },
 
-  -- {
-  --   'folke/tokyonight.nvim',
-  --   priority = 1000,
-  --   init = function()
-  --     vim.cmd.colorscheme 'tokyonight-night'
-  --     vim.cmd.hi 'Comment gui=none'
-  --   end,
-  -- },
+  {
+    'folke/tokyonight.nvim',
+    priority = 1000,
+    init = function()
+      vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.hi 'Comment gui=none'
+    end,
+  },
   {
     'navarasu/onedark.nvim',
     enabled = true,
@@ -613,17 +613,17 @@ require('lazy').setup({
       require('onedark').setup {
         style = 'darker',
       }
-      vim.cmd.colorscheme 'onedark'
-      vim.cmd.hi 'Comment gui=none'
+      -- vim.cmd.colorscheme 'onedark'
+      -- vim.cmd.hi 'Comment gui=none'
     end,
   },
   {
     'sainnhe/sonokai',
-    enabled = false,
+    enabled = true,
     init = function()
       -- vim.g.sonokai_style = 'espresso'
-      vim.cmd.colorscheme 'sonokai'
-      vim.cmd.hi 'Comment gui=none'
+      -- vim.cmd.colorscheme 'sonokai'
+      -- vim.cmd.hi 'Comment gui=none'
     end,
   },
 
