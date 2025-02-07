@@ -30,6 +30,8 @@ end)
 vim.keymap.set('n', '<leader>oe', function()
   require('track').edit()
 end)
+vim.keymap.set('n', '<leader>th', function() require('spectre').toggle()  end, { desc = 'Toggle spectre search' })
+vim.keymap.set('n', '<leader>tn', function() require('spectre').open_visual({select_word=true})  end, { desc = 'Spectre search word' })
 
 return {
 
@@ -72,4 +74,8 @@ return {
       require('track').setup()
     end,
   },
+  {
+    'nvim-pack/nvim-spectre',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+  }
 }
