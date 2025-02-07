@@ -23,13 +23,14 @@ vim.keymap.set('n', '<leader>so', '<CMD>Telescope file_browser path=%:p:h select
 
 vim.keymap.set('n', '<leader>oa', function()
   require('track').toggle()
-end)
+end, { desc = 'Track toggle mark' })
 vim.keymap.set('n', '<leader>oz', function()
   require('track').search()
-end)
+end, { desc = 'Track search marks' })
 vim.keymap.set('n', '<leader>oe', function()
   require('track').edit()
-end)
+end, { desc = 'Track edit mark' })
+
 vim.keymap.set('n', '<leader>th', function() require('spectre').toggle()  end, { desc = 'Toggle spectre search' })
 vim.keymap.set('n', '<leader>tn', function() require('spectre').open_visual({select_word=true})  end, { desc = 'Spectre search word' })
 
@@ -74,6 +75,7 @@ return {
   {
     'niuiic/track.nvim',
     dependencies = { 'niuiic/core.nvim', 'nvim-telescope/telescope.nvim' },
+    tag = "v1.0.0",
     config = function()
       require('track').setup()
     end,
