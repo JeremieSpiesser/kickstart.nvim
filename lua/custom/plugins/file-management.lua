@@ -19,7 +19,7 @@ vim.keymap.set('n', '<leader>e', '<CMD>NvimTreeToggle<CR>')
 vim.keymap.set('n', '<leader>E', '<CMD>NvimTreeFindFile<CR>')
 
 vim.keymap.set('n', '<leader>st', '<CMD>Telescope file_browser<CR>')
-vim.keymap.set('n', '<leader>so', '<CMD>Telescope file_browser path=%:p:h select_buffer=true<CR>')
+vim.keymap.set('n', '<leader>sT', '<CMD>Telescope file_browser path=%:p:h select_buffer=true<CR>')
 
 vim.keymap.set('n', '<leader>oa', function()
   require('track').toggle()
