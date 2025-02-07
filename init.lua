@@ -138,6 +138,10 @@ require('lazy').setup({
           return vim.fn.executable 'make' == 1
         end,
       },
+      { 
+        "nvim-telescope/telescope-live-grep-args.nvim" ,
+        version = "^1.0.0",
+      },
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
@@ -150,11 +154,47 @@ require('lazy').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          layout_strategy = "horizontal",
+          --sorting_strategy = "ascending",
+          layout_config = {
+            bottom_pane = {
+              height = 25,
+              preview_cutoff = 120,
+              prompt_position = "top"
+            },
+            center = {
+              height = 0.4,
+              preview_cutoff = 40,
+              prompt_position = "top",
+              width = 0.5
+            },
+            cursor = {
+              height = 0.9,
+              preview_cutoff = 40,
+              width = 0.8
+            },
+            horizontal = {
+              height = 0.98,
+              preview_cutoff = 120,
+              prompt_position = "bottom",
+              width = 0.9
+            },
+            vertical = {
+              height = 0.9,
+              preview_cutoff = 40,
+              prompt_position = "top",
+              width = 0.9
+            }
+          },
+          mappings = {
+            -- i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+            i = {
+                ["<S-Down>"] = require('telescope.actions').cycle_history_next,
+                ["<S-Up>"] = require('telescope.actions').cycle_history_prev,
+              },
+          },
+        },
         pickers = {
           colorscheme = {
             enable_preview = true,
@@ -171,6 +211,7 @@ require('lazy').setup({
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
       pcall(require('telescope').load_extension 'file_browser')
+      pcall(require('telescope').load_extension 'live_grep_args')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -179,7 +220,26 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-      vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+      --vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', '<leader>sg',
+        function()
+          local api = require("nvim-tree.api")
+          local is_nvimtree_buf = api.tree.is_tree_buf()
+          if is_nvimtree_buf then
+            local node = api.tree.get_node_under_cursor()
+            if not node then
+              builtin.live_grep()
+            end
+            local searchpath = node.absolute_path
+            if node.type ~= 'directory' and node.parent then
+              searchpath = node.parent.absolute_path
+            end
+            builtin.live_grep( { search_dirs = { searchpath } })
+          else
+            builtin.live_grep()
+          end
+        end
+        , { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>so', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
