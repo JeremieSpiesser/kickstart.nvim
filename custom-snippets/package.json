@@ -8,6 +8,10 @@
             {
                 "language": ["markdown", "rmd", "md"],
                 "path": "./markdown.json"
+            },
+            {
+                "language": ["cs", "csharp"],
+                "path": "./csharp.json"
             }
         ]
     }

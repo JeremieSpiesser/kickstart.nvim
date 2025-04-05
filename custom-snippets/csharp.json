@@ -1,0 +1,7 @@
+{
+    "Console.WriteLine": {
+        "prefix": "pr",
+        "body": ["Console.WriteLine(${1:text});","${0}"],
+        "description": "Add Console.WriteLine();"
+    },
+}
