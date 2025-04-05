@@ -5,6 +5,7 @@ vim.g.have_nerd_font = true
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.mouse = 'a'
 vim.opt.showmode = false
 vim.opt.clipboard = 'unnamedplus'
@@ -18,7 +19,9 @@ vim.opt.timeoutlen = 300
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.langmap = '.j,?.'
+--vim.opt.langmap = 'tj,jt'
+--vim.opt.listchars = { tab = '» ', trail = '.', nbsp = '␣' }
 vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 vim.opt.scrolloff = 15
