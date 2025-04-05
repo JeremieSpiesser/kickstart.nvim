@@ -597,36 +597,6 @@ require('lazy').setup({
       }
     end,
   },
-
-  {
-    'folke/tokyonight.nvim',
-    priority = 1000,
-    init = function()
-      vim.cmd.colorscheme 'tokyonight-night'
-      vim.cmd.hi 'Comment gui=none'
-    end,
-  },
-  {
-    'navarasu/onedark.nvim',
-    enabled = true,
-    init = function()
-      require('onedark').setup {
-        style = 'darker',
-      }
-      -- vim.cmd.colorscheme 'onedark'
-      -- vim.cmd.hi 'Comment gui=none'
-    end,
-  },
-  {
-    'sainnhe/sonokai',
-    enabled = true,
-    init = function()
-      -- vim.g.sonokai_style = 'espresso'
-      -- vim.cmd.colorscheme 'sonokai'
-      -- vim.cmd.hi 'Comment gui=none'
-    end,
-  },
-
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
@@ -711,6 +681,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.lint',
 
   { import = 'custom.plugins' },
+  { import = 'custom.themes' },
   { import = 'custom.keymaps' },
 }, {
   ui = {
