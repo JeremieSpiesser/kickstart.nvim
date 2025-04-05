@@ -1,3 +1,17 @@
+-- vim.api.nvim_create_autocmd('FileType', {
+--   pattern = 'cs',
+--   callback = function(args)
+--     local root_dir = vim.fs.dirname(
+--       vim.fs.find({ '.sln', '.csproj', '.git' }, { upward = true })[1]
+--     )
+--     vim.lsp.start({
+--       name = 'roslyn-language-server',
+--       cmd = {'roslyn-language-server'},
+--       root_dir = root_dir,
+--     })
+--   end,
+-- })
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
@@ -158,6 +172,7 @@ require('lazy').setup({
         --  All the info you're looking for is in `:help telescope.setup()`
         --
         defaults = {
+          path_display = { "truncate" },
           layout_strategy = "horizontal",
           --sorting_strategy = "ascending",
           layout_config = {
@@ -199,6 +214,15 @@ require('lazy').setup({
           },
         },
         pickers = {
+          buffers = {
+            show_all_buffers = true,
+            sort_lastused = true,
+            mappings = {
+              i = {
+                ["<c-s-d>"] = "delete_buffer",
+              }
+            }
+          },
           colorscheme = {
             enable_preview = true,
           },
