@@ -16,6 +16,24 @@ vim.keymap.set('n', '<leader>sf', function()
     end
 end)
 
+vim.keymap.set('n', '<leader>sF', function()
+    local api = require("nvim-tree.api")
+    local is_nvimtree_buf = api.tree.is_tree_buf()
+    if is_nvimtree_buf then
+        local node = api.tree.get_node_under_cursor()
+        if not node then
+            require('fzf-lua').files()
+        end
+        local searchpath = node.absolute_path
+        if node.type ~= 'directory' and node.parent then
+            searchpath = node.parent.absolute_path
+        end
+        require('fzf-lua').files( { cwd = searchpath, multiline = 2})
+    else
+        require('fzf-lua').files({ multiline = 2 })
+    end
+end)
+
 vim.keymap.set('n', '<leader>sg', function()
     local api = require("nvim-tree.api")
     local is_nvimtree_buf = api.tree.is_tree_buf()
@@ -31,6 +49,24 @@ vim.keymap.set('n', '<leader>sg', function()
         require('fzf-lua').grep_project( { cwd = searchpath})
     else
         require('fzf-lua').grep_project()
+    end
+end)
+
+vim.keymap.set('n', '<leader>sG', function()
+    local api = require("nvim-tree.api")
+    local is_nvimtree_buf = api.tree.is_tree_buf()
+    if is_nvimtree_buf then
+        local node = api.tree.get_node_under_cursor()
+        if not node then
+            require('fzf-lua').grep_project()
+        end
+        local searchpath = node.absolute_path
+        if node.type ~= 'directory' and node.parent then
+            searchpath = node.parent.absolute_path
+        end
+        require('fzf-lua').grep_project( { cwd = searchpath, multiline =2})
+    else
+        require('fzf-lua').grep_project({ multiline =2 })
     end
 end)
 
