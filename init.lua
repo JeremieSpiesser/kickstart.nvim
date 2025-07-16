@@ -34,8 +34,8 @@ vim.opt.timeoutlen = 300
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.list = true
-vim.opt.langmap = '-j'
---vim.opt.langmap = '.j,?.'
+
+--vim.opt.langmap = '-j'
 --vim.opt.langmap = 'tj,jt'
 --vim.opt.listchars = { tab = '» ', trail = '.', nbsp = '␣' }
 vim.opt.inccommand = 'split'
@@ -259,23 +259,8 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader><leader>', require('fzf-lua').buffers, { desc = '[ ] Find existing buffers' })
       vim.keymap.set('n', '<leader>dd', require('fzf-lua').lsp_document_diagnostics, { desc = 'Show diagnostic [E]rror messages' })
 
-      -- Slightly advanced example of overriding default behavior and theme
-      vim.keymap.set('n', '<leader>/', function()
-        -- You can pass additional configuration to Telescope to change the theme, layout, etc.
-        builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-          winblend = 10,
-          previewer = false,
-        })
-      end, { desc = '[/] Fuzzily search in current buffer' })
-
-      -- It's also possible to pass additional configuration options.
-      --  See `:help telescope.builtin.live_grep()` for information about particular keys
-      vim.keymap.set('n', '<leader>s/', function()
-        builtin.live_grep {
-          grep_open_files = true,
-          prompt_title = 'Live Grep in Open Files',
-        }
-      end, { desc = '[S]earch [/] in Open Files' })
+      vim.keymap.set('n', '<leader>/', require('fzf-lua').blines , { desc = '[/] Fuzzily search in current buffer' })
+      vim.keymap.set('n', '<leader>s/', require('fzf-lua').lines , { desc = '[/] Fuzzily search in current buffer' })
 
       -- Shortcut for searching your Neovim configuration files
       vim.keymap.set('n', '<leader>sn', function()
@@ -700,6 +685,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.lint',
 
   { import = 'custom.plugins' },
+  { import = 'custom.autocmd' },
   { import = 'custom.themes' },
   { import = 'custom.keymaps' },
 }, {
@@ -723,10 +709,10 @@ require('lazy').setup({
     },
   },
 })
---vim.opt.scroll = 15
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
-vim.opt.tabstop = 4
+vim.opt.tabstop = 9
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
+--vim.opt.scroll = 15
+-- The line beneath this is called `modeline`. See `:help modeline`
+-- vim: ts=2 sts=2 sw=2 et
