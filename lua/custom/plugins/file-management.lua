@@ -38,6 +38,16 @@ end, { desc = 'Track save mark' })
 vim.keymap.set('n', '<leader>th', function() require('spectre').toggle()  end, { desc = 'Toggle spectre search' })
 vim.keymap.set('n', '<leader>tn', function() require('spectre').open_visual({select_word=true})  end, { desc = 'Spectre search word' })
 
+local function my_on_attach(bufnr)
+  local api = require "nvim-tree.api"
+
+  local function opts(desc)
+    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
+  api.config.mappings.default_on_attach(bufnr)
+  vim.keymap.set('n', '<C-j>', api.node.open.edit,        opts('Up'))
+end
+
 return {
 
   {
@@ -65,6 +75,7 @@ return {
       },
       config = function()
         require('nvim-tree').setup {
+          on_attach = my_on_attach,
           sync_root_with_cwd = true,
           view = {
             width = {
