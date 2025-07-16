@@ -8,13 +8,16 @@ return {
 		-- end,
 	},
 	{
+		'rebelot/kanagawa.nvim'
+	},
+	{
 		'navarasu/onedark.nvim',
 		enabled = true,
 		init = function()
 			require('onedark').setup {
 				style = 'darker',
 			}
-			vim.cmd.colorscheme 'onedark'
+			-- vim.cmd.colorscheme 'onedark'
 			vim.cmd.hi 'Comment gui=none'
 		end,
 	},
@@ -23,7 +26,7 @@ return {
 		enabled = true,
 		init = function()
 			-- vim.g.sonokai_style = 'espresso'
-			-- vim.cmd.colorscheme 'sonokai'
+			vim.cmd.colorscheme 'sonokai'
 			-- vim.cmd.hi 'Comment gui=none'
 		end,
 	},
