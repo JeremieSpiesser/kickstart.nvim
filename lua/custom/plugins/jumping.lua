@@ -18,6 +18,29 @@ return {
     lazy = false,
   },
   {
+    "folke/flash.nvim",
+    enabled = false,
+    event = "VeryLazy",
+    ---@type Flash.Config
+    opts = {
+      jump = {
+        autojump = false,
+      },
+      modes = {
+        char = {
+          jump_labels = false
+        }
+      },
+      keys = {
+        { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+        { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+        { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+        { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+        --{ "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+      }
+    }
+  },
+  {
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',
     lazy = false,
@@ -28,13 +51,14 @@ return {
     },
     keys = function()
       local harpoon = require 'harpoon'
-      local keys = { {
-        '<leader>a',
-        function()
-          harpoon:list():append()
-        end,
-        desc = 'Harpoon add file',
-      } }
+      local keys = { }
+      -- local keys = { {
+      --   '<leader>a',
+      --   function()
+      --     harpoon:list():append()
+      --   end,
+      --   desc = 'Harpoon add file',
+      -- } }
       local mappings = { 'h', 'j', 'k', 'l' }
 
       for i, k in ipairs(mappings) do
